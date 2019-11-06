@@ -21,3 +21,20 @@ export const postOrder = async (newOrder) => {
   }
   
 };
+
+export const deleteOrder = async (orderId) => {
+  try {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const url = `http://localhost:3001/api/v1/orders/${orderId}`
+    const response = await fetch(url, options)
+    const data = await response.json();
+      return data
+  } catch(error) {
+    throw Error("Problem deleting order")
+  }
+};
