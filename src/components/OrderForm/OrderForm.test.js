@@ -2,6 +2,9 @@ import React from 'react';
 import { OrderForm, mapDispatchToProps, mapStateToProps } from './OrderForm';
 import { shallow } from 'enzyme';
 import { setOrders } from '../../actions/index';
+import { getOrders, postOrder } from '../../apiCalls';
+
+jest.mock('../../apiCalls');
 
 describe('OrderForm', () => {
   let wrapper;
@@ -21,6 +24,8 @@ describe('OrderForm', () => {
     ingredients: ["Pants", "Pugs", "Sweaters"]
   }];
   
+  getOrders.mockImplementation(() => Promise.resolve(mockOrders))
+  postOrder.mockImplementation(() => Promise.resolve())
 
   beforeEach(() => {
     wrapper = shallow(<OrderForm 
