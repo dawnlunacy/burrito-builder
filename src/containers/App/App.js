@@ -26,7 +26,7 @@ export class App extends Component {
           <h1>Burrito Builder</h1>
           <OrderForm />
         </header>
-        
+        <p> Testing </p>
         <Orders orders={this.props.orders}/>
       </main>
     );
