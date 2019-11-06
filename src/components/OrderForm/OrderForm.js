@@ -59,13 +59,11 @@ export class OrderForm extends Component {
       const { setOrders } = this.props
     await postOrder(this.state);
     const updatedOrders = await getOrders();
-    console.log(updatedOrders)
     setOrders(updatedOrders.orders)
     }
     catch(error) {
       handleError(error.message)
     }
-    
   }
 
 
