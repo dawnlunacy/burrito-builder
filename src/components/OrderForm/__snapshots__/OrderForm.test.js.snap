@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderForm should match the snapshot 1`] = `
+<form>
+  <input
+    name="name"
+    onChange={[Function]}
+    placeholder="Name"
+    type="text"
+    value=""
+  />
+  <button
+    key="beans"
+    name="beans"
+    onClick={[Function]}
+  >
+    beans
+  </button>
+  <button
+    key="steak"
+    name="steak"
+    onClick={[Function]}
+  >
+    steak
+  </button>
+  <button
+    key="carnitas"
+    name="carnitas"
+    onClick={[Function]}
+  >
+    carnitas
+  </button>
+  <button
+    key="sofritas"
+    name="sofritas"
+    onClick={[Function]}
+  >
+    sofritas
+  </button>
+  <button
+    key="lettuce"
+    name="lettuce"
+    onClick={[Function]}
+  >
+    lettuce
+  </button>
+  <button
+    key="queso fresco"
+    name="queso fresco"
+    onClick={[Function]}
+  >
+    queso fresco
+  </button>
+  <button
+    key="pico de gallo"
+    name="pico de gallo"
+    onClick={[Function]}
+  >
+    pico de gallo
+  </button>
+  <button
+    key="hot sauce"
+    name="hot sauce"
+    onClick={[Function]}
+  >
+    hot sauce
+  </button>
+  <button
+    key="guacamole"
+    name="guacamole"
+    onClick={[Function]}
+  >
+    guacamole
+  </button>
+  <button
+    key="jalapenos"
+    name="jalapenos"
+    onClick={[Function]}
+  >
+    jalapenos
+  </button>
+  <button
+    key="cilantro"
+    name="cilantro"
+    onClick={[Function]}
+  >
+    cilantro
+  </button>
+  <button
+    key="sour cream"
+    name="sour cream"
+    onClick={[Function]}
+  >
+    sour cream
+  </button>
+  <p>
+    Order: 
+    Nothing selected
+  </p>
+  <p>
+     
+    Please select some ingredients
+     
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Submit Order
+  </button>
+</form>
+`;
