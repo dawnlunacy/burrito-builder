@@ -5,7 +5,7 @@ import './Orders.css';
 const Orders = ({orders}) => {
   
 console.log("ORDERS", orders)
-  if (orders === {}) {
+  if (orders.length === 0) {
     return <p> No Orders Yet. </p>
   } else {
     const orderEls = orders.map(order => {
