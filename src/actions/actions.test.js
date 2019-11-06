@@ -25,4 +25,19 @@ describe('actions', () => {
       expect(result).toEqual(expectedAction);
     });
   });
+
+  describe('handleError', () => {
+    it('should have a type of SET_ERROR_MESSAGE', () => {
+      const mockErrorMessage = "Please select some ingredients";
+
+      const expectedAction = {
+        type: 'SET_ERROR_MESSAGE',
+        errorMessage: mockErrorMessage
+      }
+
+      const result = actions.handleError(mockErrorMessage)
+
+      expect(result).toEqual(expectedAction);
+    });
+  });
 });
