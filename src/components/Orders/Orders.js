@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './Orders.css';
 
-const Orders = ({orders}) => {
+export const Orders = ({orders}) => {
   
   if (orders.length === 0) {
     return <p> No Orders Yet. </p>
