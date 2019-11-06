@@ -15,10 +15,26 @@ export const postOrder = async (newOrder) => {
   
     const response = await fetch('http://localhost:3001/api/v1/orders', options)
     const data = await response.json();
-    console.log("RESPONSE POST", data)
       return data
   } catch(error) {
     throw Error("Problem fethcing orders")
   }
   
+};
+
+export const deleteOrder = async (orderId) => {
+  try {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const url = `http://localhost:3001/api/v1/orders/${orderId}`
+    const response = await fetch(url, options)
+    const data = await response.json();
+      return data
+  } catch(error) {
+    throw Error("Problem deleting order")
+  }
 };

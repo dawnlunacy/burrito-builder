@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteOrder } from '../../apiCalls';
+
 import './Orders.css';
 
 export const Orders = ({orders}) => {
@@ -16,6 +18,7 @@ export const Orders = ({orders}) => {
               return <li key={ingredient}>{ingredient}</li>
             })}
           </ul>
+          <button id={order.id} onClick={e => deleteOrder(e.target.id) }> Delete Order </button>
         </div>
       )
     });
