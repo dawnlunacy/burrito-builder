@@ -54,10 +54,18 @@ export class OrderForm extends Component {
   }
 
   updateOrders = async () => {
-    const { setOrders } = this.props
+    const { handleError } = this.props;
+    try {
+      const { setOrders } = this.props
     await postOrder(this.state);
     const updatedOrders = await getOrders();
+    console.log(updatedOrders)
     setOrders(updatedOrders.orders)
+    }
+    catch(error) {
+      handleError(error.message)
+    }
+    
   }
 
 
