@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setOrders, handleError } from '../../actions';
+import { getOrders } from '../../apiCalls';
 
-class OrderForm extends Component {
-  constructor(props) {
+
+
+export class OrderForm extends Component {
+  constructor() {
     super();
-    this.props = props;
     this.state = {
       name: '',
       ingredients: []
     };
+  }
+
+  componentDidMount() {
+    const {setOrders} = this.props
+    console.log("SET", setOrders)
+    getOrders()
+      .then(data => setOrders(data.orders))
+      .catch(err => console.error('Error fetching:', err));
   }
 
   handleNameChange = e => {
@@ -21,14 +34,27 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.clearInputs();
+    this.checkInputs();
+  }
+
+  checkInputs = () => {
+    const { handleError, setOrders, orders } = this.props;
+    if (this.state.ingredients.length === 0) {
+      handleError(`${this.state.name} Please select some ingredients`)
+    }
+    else {
+      setOrders([...orders, this.state]);
+      this.clearInputs();
+    }
   }
 
   clearInputs = () => {
     this.setState({name: '', ingredients: []});
   }
 
+
   render() {
+    const {errorMessage } = this.props;
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
@@ -51,7 +77,8 @@ class OrderForm extends Component {
         { ingredientButtons }
 
         <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
-
+        <p> { errorMessage } </p>
+        
         <button onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>
@@ -60,4 +87,18 @@ class OrderForm extends Component {
   }
 }
 
-export default OrderForm;
+// export default OrderForm;
+
+export const mapStateToProps = state => ({
+  orders: state.orders,
+  errorMessage: state.errorMessage
+});
+
+export const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    setOrders,
+    handleError
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
