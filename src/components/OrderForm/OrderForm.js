@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setOrders } from '../../actions';
+import { getOrders } from '../../apiCalls';
 
-class OrderForm extends Component {
-  constructor(props) {
+
+
+export class OrderForm extends Component {
+  constructor() {
     super();
-    this.props = props;
     this.state = {
       name: '',
       ingredients: []
     };
+  }
+
+  componentDidMount() {
+    const {setOrders} = this.props
+    console.log("SET", setOrders)
+    getOrders()
+      .then(data => setOrders(data.orders))
+      .catch(err => console.error('Error fetching:', err));
   }
 
   handleNameChange = e => {
@@ -60,4 +73,16 @@ class OrderForm extends Component {
   }
 }
 
-export default OrderForm;
+// export default OrderForm;
+
+export const mapStateToProps = state => ({
+  orders: state.orders
+});
+
+export const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    setOrders,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderForm);
