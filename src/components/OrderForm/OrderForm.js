@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setOrders, handleError } from '../../actions';
-import { getOrders } from '../../apiCalls';
+import { getOrders, postOrder } from '../../apiCalls';
 
 
 
@@ -10,7 +10,6 @@ export class OrderForm extends Component {
   constructor() {
     super();
     this.state = {
-      id: Date.now(),
       name: '',
       ingredients: []
     };
@@ -18,7 +17,6 @@ export class OrderForm extends Component {
 
   componentDidMount() {
     const { setOrders } = this.props
-    console.log("SET", setOrders)
     getOrders()
       .then(data => setOrders(data.orders))
       .catch(err => console.error('Error fetching:', err));
@@ -41,18 +39,25 @@ export class OrderForm extends Component {
   }
 
   checkInputs = () => {
-    const { handleError, setOrders, orders } = this.props;
+    const { handleError } = this.props;
     if (this.state.ingredients.length === 0) {
       handleError(`${this.state.name} Please select some ingredients`)
     }
     else {
-      setOrders([...orders, this.state]);
+      this.updateOrders();
       this.clearInputs();
     }
   }
 
   clearInputs = () => {
     this.setState({name: '', ingredients: []});
+  }
+
+  updateOrders = async () => {
+    const { setOrders } = this.props
+    await postOrder(this.state);
+    const updatedOrders = await getOrders();
+    setOrders(updatedOrders.orders)
   }
 
 
@@ -90,7 +95,6 @@ export class OrderForm extends Component {
   }
 }
 
-// export default OrderForm;
 
 export const mapStateToProps = state => ({
   orders: state.orders,
