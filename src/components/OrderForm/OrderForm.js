@@ -38,12 +38,12 @@ export class OrderForm extends Component {
   }
 
   checkInputs = () => {
-    const { handleError, setOrders } = this.props;
+    const { handleError, setOrders, orders } = this.props;
     if (this.state.ingredients.length === 0) {
       handleError(`${this.state.name} Please select some ingredients`)
     }
     else {
-      setOrders(this.state);
+      setOrders([...orders, this.state]);
       this.clearInputs();
     }
   }
