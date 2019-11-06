@@ -10,17 +10,20 @@ export class OrderForm extends Component {
   constructor() {
     super();
     this.state = {
+      id: Date.now(),
       name: '',
       ingredients: []
     };
   }
 
   componentDidMount() {
-    const {setOrders} = this.props
+    const { setOrders } = this.props
     console.log("SET", setOrders)
     getOrders()
       .then(data => setOrders(data.orders))
       .catch(err => console.error('Error fetching:', err));
+      
+    
   }
 
   handleNameChange = e => {
